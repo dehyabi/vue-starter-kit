@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <suspense>
+    <template #default>
+      <async-component>
+        <AsyncAwait heading="Implementation of Using Async Await in Vue 3" />
+      </async-component>
+    </template>
+
+    <template #fallback>
+      <p>Loading...</p>
+    </template>
+  </suspense>
+  <LoopingData heading="Implementation of Looping Data in Vue 3" />
+  <HelloWorld msg="Welcome to Your Vue.js App" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import AsyncAwait from "./components/AsyncAwait.vue";
+import LoopingData from "./components/LoopingData.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+    AsyncAwait,
+    LoopingData,
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
