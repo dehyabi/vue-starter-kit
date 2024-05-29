@@ -17,14 +17,19 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import AsyncAwait from "./components/AsyncAwait.vue";
 import LoopingData from "./components/LoopingData.vue";
+
+import { defineAsyncComponent } from "vue";
+
+const AsyncComponent = defineAsyncComponent(() =>
+  import("./components/AsyncAwait.vue")
+);
 
 export default {
   name: "App",
   components: {
     HelloWorld,
-    AsyncAwait,
+    AsyncComponent,
     LoopingData,
   },
 };
