@@ -18,12 +18,15 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import LoopingData from "./components/LoopingData.vue";
+import LoadingMessage from "./components/LoadingMessage.vue";
 
 import { defineAsyncComponent } from "vue";
 
-const AsyncComponent = defineAsyncComponent(() =>
-  import("./components/AsyncAwait.vue")
-);
+const AsyncComponent = defineAsyncComponent({
+  loader: () => import("./components/AsyncAwait.vue"),
+  loadingComponent: LoadingMessage,
+  suspensible: false,
+});
 
 export default {
   name: "App",
