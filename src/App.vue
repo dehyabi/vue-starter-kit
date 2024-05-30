@@ -1,5 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
+  <ActiveTab />
   <suspense>
     <template #default>
       <async-component>
@@ -19,6 +20,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import LoopingData from "./components/LoopingData.vue";
 import LoadingMessage from "./components/LoadingMessage.vue";
+import ActiveTab from "./components/ActiveTab.vue";
 
 import { defineAsyncComponent } from "vue";
 
@@ -34,6 +36,7 @@ export default {
     HelloWorld,
     AsyncComponent,
     LoopingData,
+    ActiveTab
   },
 };
 </script>
