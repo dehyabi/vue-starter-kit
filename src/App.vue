@@ -1,44 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <ActiveTab />
-  <suspense>
-    <template #default>
-      <async-component>
-        <AsyncAwait heading="Implementation of Using Async Await in Vue 3" />
-      </async-component>
-    </template>
+  <main>
+    <h1>Infinite Scrolling Component</h1>
+    <Suspense>
+      <InfiniteScroll />
+      <template #fallback>
+        <p>Loading...</p>
+      </template>
+    </Suspense>
+  </main>
 
-    <template #fallback>
-      <p>Loading...</p>
-    </template>
-  </suspense>
-  <LoopingData heading="Implementation of Looping Data in Vue 3" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
-import LoopingData from "./components/LoopingData.vue";
-import LoadingMessage from "./components/LoadingMessage.vue";
-import ActiveTab from "./components/ActiveTab.vue";
-
-import { defineAsyncComponent } from "vue";
-
-const AsyncComponent = defineAsyncComponent({
-  loader: () => import("./components/AsyncAwait.vue"),
-  loadingComponent: LoadingMessage,
-  suspensible: false,
-});
-
-export default {
-  name: "App",
-  components: {
-    HelloWorld,
-    AsyncComponent,
-    LoopingData,
-    ActiveTab
-  },
-};
+<script setup>
+import InfiniteScroll from './components/InfiniteScroll.vue'
 </script>
 
-<style></style>
+<style scoped>
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+p {
+  text-align: center;
+}
+  
+</style>
