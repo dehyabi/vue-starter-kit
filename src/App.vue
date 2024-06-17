@@ -1,39 +1,31 @@
+//App.vue
+
 <template>
-  <div class="ml-5 mt-5 flex justify-center">
-    <input class="input" type="text" placeholder="First Name" v-model="firstName">
-    <input class="input" type="text" placeholder="Last Name" v-model="lastName">
-  </div>
-  <PersonGreeting :firstName="firstName" :lastName="lastName" @callHeroes="callHeroes" />
+  <main>
+    <h1>Infinite Scrolling Component</h1>
+    <Suspense>
+      <InfiniteScroll />
+      <template #fallback>
+        <p>Loading...</p>
+      </template>
+    </Suspense>
+  </main>
+
 </template>
 
-<script>
-import {ref} from "vue";
-import PersonGreeting from './components/PersonGreeting.vue'
-export default {
-  components: {
-    PersonGreeting
-  },
-  setup() {
-    const firstName = ref('')
-    const lastName = ref('')
-
-    function callHeroes(hero) {
-      alert(`Calling ${hero}`)
-    }
-
-    return {
-      firstName,
-      lastName,
-      callHeroes
-    }
-  }
-}
+<script setup>
+import InfiniteScroll from './components/InfiniteScroll.vue'
 </script>
 
 <style scoped>
-
-.input {
-  @apply border border-gray-400 mr-2 pl-2 rounded-md py-2;
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
+p {
+  text-align: center;
+}
+  
 </style>

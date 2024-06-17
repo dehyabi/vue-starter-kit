@@ -1,3 +1,4 @@
+// components/InfiniteScroll.vue
 <template>
     <div>
         <ul ref="listEl">
@@ -15,6 +16,7 @@
 <script setup>
 import {ref} from "vue";
 import getUsers from "../api/getUsers";
+import getTotalUsers from "../api/getTotalUsers";
 import {useInfiniteScroll} from "@vueuse/core";
 
 const listEl = ref(null);
@@ -36,11 +38,24 @@ const getUsersOnScroll = async () => {
     );
     fetchingData.value = null;
 
+
+    const currentData = usersList.value.length + usersToShow;
+    console.log('currentData: ',currentData);
+
+    const remainingData = totalData - currentData;
+
+    console.log('remainingData: ',remainingData);
+
     usersList.value.push(...newUsers);
+
     } catch (err) {
         console.log(err);
     }
 }
+
+const totalData = await getTotalUsers();
+
+
 
 useInfiniteScroll(
     listEl,
