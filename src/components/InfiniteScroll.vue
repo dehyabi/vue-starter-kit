@@ -1,12 +1,15 @@
 <template>
     <div>
-        <ul ref="listEl">
+        <ul ref="listEl" class="data" id="data">
             <li v-for="user in usersList" :key="user.id">
-                {{ user.firstName }}
+                {{user.id}} {{ user.firstName }}
             </li>
-            <p v-show="fetchingData">
-                Fetching more users... 
+            <p v-if="fetchingData && nextData > 0">
+                Fetching ({{ nextData }}) more users... 
             </p>
+            <p v-else>
+                No more data
+            </p>    
         </ul>
     </div>
   
@@ -26,7 +29,13 @@ const usersList = ref(await getUsers(usersToShow, 0));
 
 const fetchingData = ref(null);
 
+const totalData = await getTotalUsers();
+
+const nextData = ref(totalData - usersToShow);
+
 const getUsersOnScroll = async () => {
+
+
     fetchingData.value = true;
     await new Promise((res) => setTimeout(res, 2000));
 
@@ -36,12 +45,16 @@ const getUsersOnScroll = async () => {
         usersList.value.length
     );
     fetchingData.value = null;
-
-
+    
     const currentData = usersList.value.length + usersToShow;
     console.log('currentData: ',currentData);
 
     const remainingData = totalData - currentData;
+
+    nextData.value = remainingData;
+
+    const lastData = totalData % usersToShow;
+    console.log('lastData', lastData);
 
     console.log('remainingData: ',remainingData);
 
@@ -51,8 +64,6 @@ const getUsersOnScroll = async () => {
         console.log(err);
     }
 }
-
-const totalData = await getTotalUsers();
 
 
 
@@ -65,6 +76,7 @@ useInfiniteScroll(
         distance: 10
     }
 );
+
 </script>
 
 <style scoped>
@@ -73,7 +85,7 @@ useInfiniteScroll(
         display: flex;
     }
 
-    ul {
+    .data {
         background-color: rgb(136, 147, 219);
         list-style: none;
         max-height: 600px;
