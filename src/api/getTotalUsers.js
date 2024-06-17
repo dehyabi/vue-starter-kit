@@ -1,5 +1,3 @@
-// api/getTotalUsers.js
-
 import axios from 'axios';
 
 const getTotalUsers = async () => {

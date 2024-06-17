@@ -1,5 +1,3 @@
-//App.vue
-
 <template>
   <main>
     <h1>Infinite Scrolling Component</h1>

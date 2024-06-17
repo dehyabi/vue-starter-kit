@@ -1,4 +1,3 @@
-// components/InfiniteScroll.vue
 <template>
     <div>
         <ul ref="listEl">
