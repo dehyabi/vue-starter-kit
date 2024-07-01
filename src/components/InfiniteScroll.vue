@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="data" id="data">
+    <ul class="data" id="data" ref="elData">
       <li v-for="user in usersList" :key="user.id">
         {{ user.id }} {{ user.firstName }}
       </li>
@@ -32,8 +32,10 @@ const totalData = await getTotalUsers();
 
 const nextData = ref(totalData - usersToShow);
 
+const elData = ref(null);
+
 const loadMore = () => {
-  useInfiniteScroll(window, async () => {
+  useInfiniteScroll(elData, async () => {
     const getUsersOnScroll = async () => {
       await new Promise((res) => setTimeout(res, 1000));
 
@@ -72,7 +74,8 @@ div {
 }
 
 .data {
-  background-color: rgb(136, 147, 219);
+  max-height: 400px;
+  background-color: rgb(27, 209, 24);
   list-style: none;
 
   overflow: scroll;
